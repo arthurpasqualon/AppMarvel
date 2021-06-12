@@ -1,0 +1,74 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "flexDirection": "row",
+        "marginBottom": 5,
+        "width": "100%",
+      },
+    ]
+  }
+>
+  <TextInput
+    allowFontScaling={true}
+    onChangeText={[Function]}
+    onSubmitEditing={[Function]}
+    placeholder="Label"
+    placeholderTextColor="#E5E5E5"
+    rejectResponderTermination={true}
+    style={
+      Array [
+        Object {
+          "color": "#ffffff",
+          "fontFamily": "RobotoCondensed-Bold",
+          "fontSize": 24,
+          "marginBottom": 10,
+          "marginLeft": "7%",
+          "marginRight": 10,
+          "marginTop": 10,
+          "maxWidth": "80%",
+        },
+      ]
+    }
+    underlineColorAndroid="transparent"
+    value=""
+  />
+  <View
+    accessible={true}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "alignSelf": "center",
+        "opacity": 1,
+        "resizeMode": "contain",
+      }
+    }
+  >
+    <Image
+      source={
+        Object {
+          "testUri": "../../../src/assets/search.png",
+        }
+      }
+      style={
+        Array [
+          Object {
+            "height": 22,
+            "width": 22,
+          },
+        ]
+      }
+    />
+  </View>
+</View>
+`;

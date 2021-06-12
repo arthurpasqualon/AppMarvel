@@ -1,0 +1,82 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "backgroundColor": "#e62429",
+        "flexDirection": "row",
+        "justifyContent": "center",
+        "marginBottom": 20,
+      },
+      Object {
+        "height": "function () {
+        return fn.apply(this, arguments);
+      }60",
+      },
+    ]
+  }
+>
+  <View
+    accessible={true}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "left": 0,
+        "marginBottom": 18,
+        "marginLeft": 18,
+        "marginRight": 18,
+        "marginTop": 18,
+        "opacity": 1,
+        "position": "absolute",
+      }
+    }
+  >
+    <Image
+      source={
+        Object {
+          "testUri": "../../../src/assets/exit.png",
+        }
+      }
+      style={
+        Array [
+          Object {
+            "height": 38,
+            "width": 38,
+          },
+          Object {
+            "marginTop": [MockFunction],
+          },
+        ]
+      }
+    />
+  </View>
+  <Image
+    source={
+      Object {
+        "testUri": "../../../src/assets/logo.png",
+      }
+    }
+    style={
+      Array [
+        Object {
+          "alignSelf": "center",
+          "height": 49,
+          "width": 115,
+        },
+        Object {
+          "marginTop": [MockFunction],
+        },
+      ]
+    }
+  />
+</View>
+`;
