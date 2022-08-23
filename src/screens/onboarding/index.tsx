@@ -1,7 +1,10 @@
-import React from 'react';
-import Button from '../../components/button';
-import {markAsShown} from '../../store/onboarding';
+import React, {useCallback} from 'react';
 import {useDispatch} from 'react-redux';
+
+import Button from '../../components/button';
+
+import {markAsShown} from '../../store/onboarding';
+
 import strings from '../../locale/en-us';
 
 import {
@@ -16,17 +19,18 @@ import {
 import {useNavigation} from '@react-navigation/core';
 import theme from './theme';
 import useLocation from '../../hooks/useLocation';
+import {RootStackScreenProps} from '../../routes/types';
 
 function Onboarding() {
   const bg = require('assets/images/bg.png');
   const dispatch = useDispatch();
-  const navigation = useNavigation();
+  const {navigate} = useNavigation<RootStackScreenProps>();
   const {OnboardingStrings} = strings;
 
-  const onPress = () => {
+  const onPress = useCallback(() => {
     dispatch(markAsShown());
-    navigation.navigate('Loading');
-  };
+    navigate('SELECT_CHARACTER');
+  }, [dispatch, navigate]);
 
   useLocation();
 

@@ -1,16 +1,17 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable react-native/no-inline-styles */
 import {useNavigation} from '@react-navigation/core';
 import React, {useMemo, useState} from 'react';
-import {LayoutAnimation} from 'react-native';
-import {FlatList} from 'react-native-gesture-handler';
-import {useDispatch, useSelector} from 'react-redux';
+import {LayoutAnimation, FlatList, StyleSheet} from 'react-native';
+import {useDispatch} from 'react-redux';
+
+import {RootStackScreenProps} from '../../routes/types';
+
 import Button from '../../components/button';
 import ErrorContent from '../../components/error-content';
 import Search from '../../components/search';
 import useSearchCharacter from '../../hooks/useSearchCharacter';
+
 import {setCharacter} from '../../store/character';
-import strings from '../../locale/en-us';
+
 import {
   Container,
   ButtonContainer,
@@ -21,15 +22,16 @@ import {
 } from './styles';
 import theme from './theme';
 
+import strings from '../../locale/en-us';
+
 function SelectCharacter() {
-  const initialData = useSelector((state: any) => state.defaultSearch);
   const [text, setText] = useState('');
   const [searchText, setSearchText] = useState('');
   const [selected, setSelected] = useState(0);
-  const {data, error, loading, refresh} = useSearchCharacter({
+  const {data, error, loading} = useSearchCharacter({
     text: searchText,
   });
-  const {navigate} = useNavigation();
+  const {navigate} = useNavigation<RootStackScreenProps>();
   const dispatch = useDispatch();
   const {SelectCharacterStrings} = strings;
 
@@ -44,21 +46,18 @@ function SelectCharacter() {
   };
 
   const displayError = useMemo(() => {
-    if (initialData && searchText === '') {
-      return false;
-    }
-    if (!loading && error) {
+    if (error) {
       return true;
     }
-    if (!data?.data?.results?.length) {
+    if (!loading && !data?.data?.results?.length) {
       return true;
     }
     return false;
-  }, [loading, error, data, initialData]);
+  }, [loading, error, data]);
 
   const onPressConfirm = () => {
-    dispatch(setCharacter({id: selected}));
-    navigate('Home');
+    dispatch(setCharacter(selected));
+    navigate('COMICS');
   };
 
   return (
@@ -74,15 +73,14 @@ function SelectCharacter() {
         <FlatList
           showsVerticalScrollIndicator={false}
           numColumns={3}
-          data={data?.data?.results || initialData?.results}
-          columnWrapperStyle={{alignItems: 'center', justifyContent: 'center'}}
+          data={data?.data?.results}
+          refreshing={loading}
+          columnWrapperStyle={styles.columnWrapper}
           keyExtractor={(item: any) => `${item?.id}`}
           renderItem={({item}: any) => (
             <ItemContainer onPress={() => onPressItem(item?.id)}>
               <ItemImage
-                style={
-                  selected === item?.id && {borderWidth: 4, borderColor: 'red'}
-                }
+                style={selected === item?.id && styles.selected}
                 resizeMode="stretch"
                 source={{
                   uri: `${item?.thumbnail?.path}.${item?.thumbnail?.extension}`,
@@ -105,5 +103,16 @@ function SelectCharacter() {
     </Container>
   );
 }
+
+const styles = StyleSheet.create({
+  selected: {
+    borderWidth: 4,
+    borderColor: 'red',
+  },
+  columnWrapper: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
 
 export default SelectCharacter;

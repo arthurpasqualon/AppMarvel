@@ -8,7 +8,7 @@ const initialState = {
   id: null,
 };
 
-export const setCharacter = ({id}: any) => {
+export const setCharacter = (id: number) => {
   return {
     type: Types.SET_CHARACTER,
     id,

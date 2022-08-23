@@ -1,19 +1,17 @@
-import AsyncStorage from '@react-native-community/async-storage';
 import {createStore} from 'redux';
 import {persistReducer, persistStore} from 'redux-persist';
 import {combineReducers} from 'redux';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import onboarding from './onboarding';
 import character from './character';
-import defaultSearch from './defaultSearch';
 import location from './location';
 
 const rootReducer = combineReducers({
   onboarding,
   character,
-  defaultSearch,
   location,
 });
-/** Root End */
 
 const persistConfig = {
   key: 'root',

@@ -1,7 +1,7 @@
 require_relative '../node_modules/react-native/scripts/react_native_pods'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
-platform :ios, '10.0'
+platform :ios, '11.0'
 
 target 'MarvelSpot' do
   config = use_native_modules!
@@ -11,7 +11,11 @@ target 'MarvelSpot' do
   pod 'GoogleMaps'
   pod 'Google-Maps-iOS-Utils'
 
-  use_react_native!(:path => config["reactNativePath"])
+  use_react_native!(
+    :path => config[:reactNativePath],
+    # to enable hermes on iOS, change `false` to `true` and then install pods
+    :hermes_enabled => false
+  )
 
   target 'MarvelSpotTests' do
     inherit! :complete
@@ -21,18 +25,11 @@ target 'MarvelSpot' do
   # Enables Flipper.
   #
   # Note that if you have use_frameworks! enabled, Flipper will not work and
-  # you should disable these next few lines.
-  use_flipper!({ 'Flipper-Folly' => '2.3.0' }) # update this part
+  # you should disable the next line.
+  use_flipper!()
+
   post_install do |installer|
-    flipper_post_install(installer)
-  end
-end
-
-target 'MarvelSpot-tvOS' do
-  # Pods for MarvelSpot-tvOS
-
-  target 'MarvelSpot-tvOSTests' do
-    inherit! :search_paths
-    # Pods for testing
+    react_native_post_install(installer)
+    __apply_Xcode_12_5_M1_post_install_workaround(installer)
   end
 end

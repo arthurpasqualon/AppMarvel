@@ -1,5 +1,5 @@
-import {API_URL, API_AUTH, MAPS_KEY} from 'react-native-dotenv';
+import Config from 'react-native-config';
 
-export const api = `${API_URL}`;
-export const auth = `${API_AUTH}`;
-export const mapsKey = `${MAPS_KEY}`;
+export const api = Config.API_URL;
+export const auth = Config.API_AUTH;
+export const mapsKey = Config.MAPS_KEY;

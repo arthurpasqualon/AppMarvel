@@ -1,15 +1,17 @@
+import {Location} from './types';
+
 const Types = {
   SET_LOCATION: 'SET_LOCATION',
 };
 
-const initialState = {
+const initialState: Location = {
   latitude: 40.705573,
   longitude: -74.0014567,
   latitudeDelta: 0.1922,
   longitudeDelta: 0.1421,
 };
 
-export const setLocation = (data: any) => {
+export const setLocation = (data: Location) => {
   return {
     type: Types.SET_LOCATION,
     data,

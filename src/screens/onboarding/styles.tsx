@@ -1,5 +1,4 @@
 import styled from 'styled-components/native';
-import normalize from '../../utils/normalize';
 import fonts from '../../resources/Fonts';
 import colors from '../../resources/Colors';
 
@@ -14,14 +13,14 @@ export const Title = styled.Text`
   font-family: ${fonts.bold};
   text-align: center;
   color: ${colors.white};
-  font-size: ${normalize(48)}px;
+  font-size: 48px;
   margin: 5px 15px;
 `;
 
 export const Description = styled.Text`
   text-align: center;
   color: ${colors.white};
-  font-size: ${normalize(20)}px;
+  font-size: 20px;
   margin: 5px 15px;
 `;
 

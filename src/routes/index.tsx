@@ -1,52 +1,38 @@
 import React from 'react';
-import {createStackNavigator} from '@react-navigation/stack';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {useSelector} from 'react-redux';
-import Home from '../screens/home';
+
+import Comics from '../screens/comics';
 import StoresMap from '../screens/stores-map';
 import Onboarding from '../screens/onboarding';
 import SelectCharacter from '../screens/select-character';
-import {fadeFromBottom} from './styles';
 import ComicDetails from '../screens/comic-detail';
-import LoadingScreen from '../screens/loading';
 
-const Root = createStackNavigator();
-const Stack = createStackNavigator();
+const Root = createNativeStackNavigator();
 
 function AppNavigator() {
   const onboardingShown = useSelector((state: any) => state.onboarding.shown);
-  const AppStack = () => (
-    <>
-      <Stack.Navigator headerMode={'none'}>
-        {!onboardingShown && (
-          <>
-            <Stack.Screen name="Onboarding" component={Onboarding} />
-          </>
-        )}
-        <Stack.Screen
-          name="Loading"
-          component={LoadingScreen}
-          options={{gestureEnabled: false}}
-        />
-        <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="StoresMap" component={StoresMap} />
-      </Stack.Navigator>
-    </>
-  );
 
   return (
-    <Root.Navigator headerMode={'none'} mode={'modal'}>
-      <Root.Screen name="App" component={AppStack} />
+    <Root.Navigator screenOptions={{headerShown: false}}>
+      {!onboardingShown && (
+        <>
+          <Root.Screen name="ONBOARDING" component={Onboarding} />
+        </>
+      )}
       <Root.Screen
-        name="SelectCharacter"
+        name="SELECT_CHARACTER"
         component={SelectCharacter}
         options={{gestureEnabled: false}}
       />
+      <Root.Screen name="COMICS" component={Comics} />
+
+      <Root.Screen name="STORES_MAP" component={StoresMap} />
       <Root.Screen
-        name="ComicDetails"
+        name="COMIC_DETAILS"
         component={ComicDetails}
         options={{
-          ...fadeFromBottom({}, {backgroundColor: 'black'}),
-          gestureEnabled: false,
+          presentation: 'transparentModal',
         }}
       />
     </Root.Navigator>

@@ -15,13 +15,6 @@ export interface SearchProps {
   label: string;
   onSubmitEditing: () => void;
 }
-export interface HomeProps {
-  route: {
-    params: {
-      characterId: number;
-    };
-  };
-}
 
 interface Url {
   url: string;

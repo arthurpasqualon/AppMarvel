@@ -1,0 +1,26 @@
+; Ignore polyfills
+node_modules/react-native/Libraries/polyfills/.*
+; Flow doesn't support platforms
+.*/Libraries/Utilities/LoadingView.js
+.*/node_modules/resolve/test/resolver/malformed_package_json/package\.json$
+[untyped]
+.*/node_modules/@react-native-community/cli/.*/.*
+[options]
+emoji=true
+exact_by_default=true
+format.bracket_spacing=false
+module.file_ext=.js
+module.file_ext=.json
+suppress_type=$FlowFixMeProps
+suppress_type=$FlowFixMeState
+[lints]
+sketchy-null-number=warn
+sketchy-null-mixed=warn
+deprecated-type=warn
+unsafe-getters-setters=warn
+unnecessary-invariant=warn
+[strict]
+deprecated-type
+untyped-type-import
+[version]
+^0.176.3

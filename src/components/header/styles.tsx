@@ -1,5 +1,4 @@
 import styled from 'styled-components/native';
-import normalize from '../../utils/normalize';
 import colors from '../../resources/Colors';
 
 export const Container = styled.View`
@@ -16,8 +15,8 @@ export const Image = styled.Image`
 `;
 
 export const LeftIcon = styled.Image`
-  width: ${normalize(25)}px;
-  height: ${normalize(25)}px;
+  width: 25px;
+  height: 25px;
 `;
 
 export const LeftContainer = styled.TouchableOpacity`

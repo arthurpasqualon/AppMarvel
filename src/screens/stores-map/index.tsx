@@ -1,23 +1,26 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable react-native/no-inline-styles */
 import React, {useEffect} from 'react';
+import {Alert, StyleSheet} from 'react-native';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {useSelector} from 'react-redux';
-import useLocation from '../../hooks/useLocation';
-import {ButtonImage, ButtonContainer} from './styles';
+import useSWR from 'swr';
 import {useNavigation} from '@react-navigation/core';
+
+import useLocation from '../../hooks/useLocation';
+
+import {fetcher} from '../../services/fetcher';
 import {mapsKey} from '../../services/api';
-import useRequest from '../../hooks/useRequest';
+
 import colors from '../../resources/Colors';
+import {ButtonImage, ButtonContainer} from './styles';
 import strings from '../../locale/en-us';
-import {Alert} from 'react-native';
+
+const mapstyle = require('assets/maps/mapstyle.json');
+const exit = require('assets/images/close.png');
 
 function StoresMap() {
-  const mapstyle = require('assets/maps/mapstyle.json');
   const initialRegion = useSelector((state: any) => state.location);
   const {top} = useSafeAreaInsets();
-  const exit = require('assets/images/close.png');
   const navigation = useNavigation();
 
   const latlng = `location=${initialRegion?.latitude},${initialRegion?.longitude}`;
@@ -25,14 +28,15 @@ function StoresMap() {
   const radius = 'radius=15000';
   const query = `${type}&${radius}&${latlng}&key=${mapsKey}`;
   const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?${query}`;
+
   const {ErrorSpotsStrings} = strings;
-  const {data, error} = useRequest({url});
+  const {data, error} = useSWR(url, fetcher);
 
   useEffect(() => {
     if (error) {
       Alert.alert(ErrorSpotsStrings.title, ErrorSpotsStrings.description);
     }
-  }, [error]);
+  }, [ErrorSpotsStrings.description, ErrorSpotsStrings.title, error]);
 
   useLocation();
 
@@ -40,7 +44,7 @@ function StoresMap() {
     <>
       {initialRegion?.latitude && (
         <MapView
-          style={{height: '100%', width: '100%'}}
+          style={styles.map}
           customMapStyle={mapstyle}
           showsUserLocation
           showsPointsOfInterest
@@ -74,4 +78,10 @@ function StoresMap() {
   );
 }
 
+const styles = StyleSheet.create({
+  map: {
+    height: '100%',
+    width: '100%',
+  },
+});
 export default StoresMap;

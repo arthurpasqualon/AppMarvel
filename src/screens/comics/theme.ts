@@ -1,5 +1,5 @@
 export default {
   button: {
-    fontSize: 20,
+    fontSize: 18,
   },
 };

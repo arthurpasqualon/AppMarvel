@@ -2,7 +2,6 @@ import styled from 'styled-components/native';
 import fonts from '../../resources/Fonts';
 import colors from '../../resources/Colors';
 
-// import normalize from '../../utils/normalize';
 import FastImage from 'react-native-fast-image';
 
 export const Container = styled.View`

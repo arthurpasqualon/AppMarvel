@@ -1,7 +1,10 @@
 import {useNavigation} from '@react-navigation/core';
-import React from 'react';
+import React, {useCallback} from 'react';
+import {Linking} from 'react-native';
+
 import Button from '../../components/button';
 import {ComicDetailProps} from '../../types';
+
 import {
   InfoContainer,
   Container,
@@ -15,7 +18,6 @@ import {
 } from './styles';
 import theme from './theme';
 import strings from '../../locale/en-us';
-import {Linking} from 'react-native';
 
 function ComicDetails({route}: ComicDetailProps) {
   const {item} = route.params;
@@ -24,9 +26,9 @@ function ComicDetails({route}: ComicDetailProps) {
   const issueNumber = item?.issueNumber;
   const url = item?.urls?.[0]?.url;
 
-  const onPressMore = () => {
+  const onPressMore = useCallback(() => {
     Linking.openURL(url);
-  };
+  }, [url]);
 
   const navigation = useNavigation();
   return (

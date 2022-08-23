@@ -1,7 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import Geolocation from '@react-native-community/geolocation';
 import {useEffect} from 'react';
 import {useDispatch} from 'react-redux';
+import Geolocation from '@react-native-community/geolocation';
+
 import {setLocation} from '../store/location';
 
 function useLocation() {
@@ -12,7 +13,6 @@ function useLocation() {
     async function retrieveLocation() {
       await Geolocation.getCurrentPosition(
         ({coords}) => {
-          console.log(coords);
           dispatch(
             setLocation({
               ...coords,
@@ -21,7 +21,7 @@ function useLocation() {
             }),
           );
         },
-        (err) => {
+        err => {
           console.log(err);
         },
         {timeout: 10000},
